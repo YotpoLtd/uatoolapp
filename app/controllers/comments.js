@@ -3,14 +3,15 @@ const mongoose = require('mongoose');
 const Comment = mongoose.model('Comment');
 
 exports.index = function (req, res) {
+
     res.json({
         title: 'Login'
     });
 };
 
 exports.create = function (req, res) {
-    var comment = new Comment(req.body);
-    comment.save();
+    // var comment = new Comment(req.body);
+    // comment.save();
     res.json({status: 200});
 };
 
@@ -23,6 +24,18 @@ exports.show = function (req, res, commentId) {
 exports.update = function (req, res, commentId) {
     res.json({
         title: 'Login'
+    });
+};
+
+exports.reply = function (req, res) {
+    res.json({
+        status: '200'
+    });
+};
+
+exports.resolve = function (req, res) {
+    res.json({
+        status: '200'
     });
 };
 
