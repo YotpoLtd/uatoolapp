@@ -17,4 +17,4 @@ CommentSchema.methods = {
 };
 
 
-mongoose.model('Project', CommentSchema);
+mongoose.model('Comment', CommentSchema);
