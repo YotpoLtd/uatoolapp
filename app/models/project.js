@@ -17,16 +17,14 @@ const ProjectSchema = new Schema({
 
 ProjectSchema.methods = {
 
-  /**
-   * Add comment
-   *
-   * @param {User} user
-   * @param {Object} comment
-   * @api private
-   */
-
   addComment: function (comment_params) {
   	var comment = new Comment(comment_params);
+  	console.log(comment.text);
+  	var username = /(@.*?)(\w+)/.exec(comment.text)
+  	if (username !== null) {
+  		console.log(username);
+  		comment.text = comment.text.replace(username[0], "[~" + username[2] + "]" );	
+  	}
   	var project = this;
   	User.findById(comment_params['user_id'], function(err, response) {
 		if (err === null) {

@@ -27,10 +27,15 @@ const CommentSchema = new Schema({
 CommentSchema.methods = {
 
   addReply: function (reply_data) {
+	var text = reply_data['text']; 
+  	var username = /(@.*?)(\w+)/.exec(text)
+  	if (username !== null) {
+  		text = text.replace(username[0], "[~" + username[2] + "]" );	
+  	}
   	var comment = this;
 	User.findById(reply_data['user_id'], function(err, response) {
 		if (err === null) {
-			comment.replies.push({ user: response, text: reply_data['text']})	  	
+			comment.replies.push({ user: response, text: text })	  	
  			comment.save();
 		}
 	});
