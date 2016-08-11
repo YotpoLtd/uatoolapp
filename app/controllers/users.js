@@ -16,7 +16,7 @@ exports.create = function (req, res) {
     var user = new User(req.body);
     console.log(user);
     user.save();
-    res.json({status: 200});
+    res.json({status: 200, user: user });
 };
 
 exports.show = function (req, res, projectId) {
