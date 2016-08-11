@@ -25,6 +25,7 @@ const projects = require('./app/controllers/projects');
 
 
 // app.param('projectId', projects.load);
+app.param('projectId', projects.load);
 app.get('/', projects.index);
 app.get('/projects', projects.index);
 app.get('/projects/:projectId', projects.show);
@@ -33,7 +34,7 @@ app.post('/projects', jsonParser, projects.create);
 
 app.post('/projects/:projectId/comments', comments.create);
 
-// app.param('commentId', comments.load);
+app.param('commentId', comments.load);
 app.post('/comments/:commentId/reply', comments.reply);
 app.post('/comments/:commentId/resolve', comments.resolve);
 

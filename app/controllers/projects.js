@@ -4,15 +4,15 @@ const Project = mongoose.model('Project');
 const { wrap: async } = require('co');
 
 
-// exports.load = function (req, res, next, id) {
-//   try {
-//     req.project = yield Project.load(id);
-//     if (!req.project) return next(new Error('Project not found'));
-//   } catch (err) {
-//     return next(err);
-//   }
-//   next();
-// };
+exports.load = async(function* (req, res, next, id) {
+  try {
+    req.project = yield Project.findOne({ '_id' : id });
+    if (!req.project) return next(new Error('Project not found'));
+  } catch (err) {
+    return next(err);
+  }
+  next();
+});
 
 exports.show = function (req, res) {
     res.json(
