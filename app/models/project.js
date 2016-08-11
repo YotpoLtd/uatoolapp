@@ -31,7 +31,7 @@ ProjectSchema.methods = {
   	User.findById(comment_params['user_id'], function(err, response) {
 		if (err === null) {
 			comment.project = project;
-    		comment.user = response
+    		comment.user = response;
     		comment.save();
 		}
 	});
