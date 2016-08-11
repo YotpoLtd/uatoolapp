@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "co": "~4.6.0",
     "body-parser": "^1.15.2",
+    "co": "~4.6.0",
+    "cors": "^2.7.1",
     "express": "^4.14.0",
     "lodash": "^4.14.2",
     "mongoose": "^4.5.8"

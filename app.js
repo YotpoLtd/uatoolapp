@@ -5,8 +5,10 @@ mongoose.connect('mongodb://localhost/uatool');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var cors = require('cors');
 var jsonParser = bodyParser.json();
 app.use(bodyParser.json());
+app.use(cors());
 
 require('./app/models/user');
 require('./app/models/comment');
