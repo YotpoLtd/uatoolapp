@@ -20,7 +20,7 @@ ProjectSchema.methods = {
   addComment: function (comment_params) {
   	var comment = new Comment(comment_params);
   	console.log(comment.text);
-  	var username = /(@.*?)(\w+)/.exec(comment.text)
+  	var username = /(@.*?)(\w+)/.exec(comment.text);
   	if (username !== null) {
   		console.log(username);
   		comment.text = comment.text.replace(username[0], "[~" + username[2] + "]" );	
@@ -31,26 +31,12 @@ ProjectSchema.methods = {
 			comment.project = project;
     		comment.user = response;
     		comment.save();
+
+            response.addJiraComment(comment_params, project);
 		}
 	});
-  },
-
-  /**
-   * Remove comment
-   *
-   * @param {commentId} String
-   * @api private
-   */
-
-  removeComment: function (commentId) {
-    const index = this.comments
-      .map(comment => comment.id)
-      .indexOf(commentId);
-
-    if (~index) this.comments.splice(index, 1);
-    else throw new Error('Comment not found');
-    return this.save();
   }
+
 };
 
 

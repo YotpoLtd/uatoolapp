@@ -1,6 +1,8 @@
 
 const mongoose = require('mongoose');
 const Comment = mongoose.model('Comment');
+const Project = mongoose.model('Project');
+const User = mongoose.model('User');
 const { wrap: async } = require('co');
 
 
@@ -40,7 +42,28 @@ exports.update = function (req, res) {
 };
 
 exports.reply = function (req, res) {
-    req.comment.addReply(req.body['reply']);
+    var comment = req.comment;
+    var reply_data = req.body;
+
+
+    var text = reply_data['text'];
+    var username = /(@.*?)(\w+)/.exec(text);
+    if (username !== null) {
+        text = text.replace(username[0], "[~" + username[2] + "]" );
+    }
+
+    User.findById(reply_data['user_id'], function(err, user) {
+        if (err === null) {
+            comment.replies.push({ user: response, text: text });
+            comment.save();
+
+            Project.findById(comment.project, function(err, project) {
+                user.addJiraReply(comment, project.jiraId);
+            });
+        }
+    });
+
+    //req.comment.addReply(req.body);
     res.json({
         status: '200'
     });
