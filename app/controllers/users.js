@@ -29,7 +29,7 @@ exports.create = function (req, res) {
 
             console.log(user);
             user.save();
-            res.json({status: 200});
+            res.json({status: 200, user: user});
 
         }
     });
