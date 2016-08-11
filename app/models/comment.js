@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = mongoose.model('User');
 
 const CommentSchema = new Schema({
     text: { type : String, default : '', trim : true },
@@ -19,13 +20,16 @@ const CommentSchema = new Schema({
 CommentSchema.methods = {
 
   addReply: function (reply_data) {
-	var user = req.comment = this.findOne({ '_id' : reply_data['user_id'] });
-	this.replies << { user: user, reply_text: reply_data['text'] }	  	
-    this.save();
+  	var comment = this;
+	User.findById(reply_data['user_id'], function(err, response) {
+		if (err === null) {
+			comment.replies.push({ user: response, text: reply_data['text']})	  	
+ 			comment.save();
+		}
+	});
   },
 
  
-
   resolve: function (statusId) {
   	if (statusId === "1") {
   		this.status = "resolved";
