@@ -38,7 +38,7 @@ exports.show = function (req, res) {
 exports.create = function (req, res) {
     var project = new Project(req.body);
     project.save();
-    res.json({status: 200});
+    res.json({status: 200, project: project});
 };
 
 exports.index = function (req, res) {
