@@ -12,6 +12,7 @@ require('./app/models/project');
 
 const projects = require('./app/controllers/projects');
 const comments = require('./app/controllers/comments');
+const users = require('./app/controllers/users');
 
 
 
@@ -25,6 +26,11 @@ app.get('/', function (req, res) {
 app.get('/projects', projects.index);
 app.get('/projects/:projectId', projects.show);
 app.post('/projects', projects.create);
+
+
+app.get('/users', users.index);
+app.get('/users/:userId', users.show);
+app.post('/users', users.create);
 
 app.listen(process.env.port, function () {
     console.log('Example app listening on port ' + process.env.port);

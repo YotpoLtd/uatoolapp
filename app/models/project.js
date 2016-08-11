@@ -5,9 +5,10 @@ const Schema = mongoose.Schema;
 const ProjectSchema = new Schema({
     title: { type : String, default : '', trim : true },
     jiraId: { type : String, default : '', trim : true },
-    owner: { type : String, default : '', trim : true },//{ type : Schema.ObjectId, ref : 'User' },
-    productOwner: { type : String, default : '', trim : true },//{ type : Schema.ObjectId, ref : 'User' },
-    designer: { type : String, default : '', trim : true },//{ type : Schema.ObjectId, ref : 'User' },
+    owner: { type : Schema.ObjectId, ref: 'User' },
+    productOwner: { type : Schema.ObjectId, ref: 'User' },
+    designer: { type : Schema.ObjectId, ref: 'User' },
+    baseUrl: { type : String, default : '', trim : true },
     createdAt  : { type : Date, default : Date.now }
 });
 
