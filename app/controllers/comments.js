@@ -23,7 +23,6 @@ exports.index = function (req, res) {
 
 exports.create = function (req, res) {
     const project = req.project;
-    console.log("asdasd");
     project.addComment(req.body);
     res.json({status: 200});
 };
@@ -47,8 +46,8 @@ exports.reply = function (req, res) {
     });
 };
 
-exports.resolve = function (req, res, status_id) {
-    req.comment.resolve(status_id);
+exports.resolve = function (req, res) {
+    req.comment.resolve(req.params.status_id);
     res.json({
         status: '200'
     });

@@ -27,7 +27,7 @@ CommentSchema.methods = {
  
 
   resolve: function (statusId) {
-  	if (statusId === 1) {
+  	if (statusId === "1") {
   		this.status = "resolved";
   	} else {
   		this.status = "unresolved";
