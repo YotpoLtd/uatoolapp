@@ -6,8 +6,9 @@ var express = require('express');
 var app = express();
 
 
-require('./app/models/project');
+require('./app/models/user');
 require('./app/models/comment');
+require('./app/models/project');
 
 const projects = require('./app/controllers/projects');
 const comments = require('./app/controllers/comments');
@@ -25,8 +26,8 @@ app.get('/projects', projects.index);
 app.get('/projects/:projectId', projects.show);
 app.post('/projects', projects.create);
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+app.listen(process.env.port, function () {
+    console.log('Example app listening on port ' + process.env.port);
 });
 
 
