@@ -1,5 +1,6 @@
 
 const mongoose = require('mongoose');
+const Comment = mongoose.model('Comment');
 const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
@@ -25,7 +26,7 @@ ProjectSchema.methods = {
 
   addComment: function (comment_params) {
   	var comment = new Comment(comment_params);
-    comment.project = this.id;
+    comment.project = this;
     comment.save();
   },
 

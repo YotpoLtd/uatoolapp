@@ -6,7 +6,7 @@ const { wrap: async } = require('co');
 
 exports.load = async(function* (req, res, next, id) {
   try {
-    req.comment = yield Comment.load(id);
+    req.comment = yield Comment.findOne({ '_id' : id });
     if (!req.comment) return next(new Error('Comment not found'));
   } catch (err) {
     return next(err);
@@ -22,30 +22,33 @@ exports.index = function (req, res) {
 };
 
 exports.create = function (req, res) {
-    var comment = new Comment(req.body);
-    comment.save();
+    const project = req.project;
+    console.log("asdasd");
+    project.addComment(req.body);
     res.json({status: 200});
 };
 
-exports.show = function (req, res, commentId) {
+exports.show = function (req, res) {
     res.json({
         title: 'Login'
     });
 };
 
-exports.update = function (req, res, commentId) {
+exports.update = function (req, res) {
     res.json({
         title: 'Login'
     });
 };
 
 exports.reply = function (req, res) {
+    req.comment.addReply(req.body['reply']);
     res.json({
         status: '200'
     });
 };
 
-exports.resolve = function (req, res) {
+exports.resolve = function (req, res, status_id) {
+    req.comment.resolve(status_id);
     res.json({
         status: '200'
     });

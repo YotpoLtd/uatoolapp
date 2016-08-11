@@ -10,11 +10,6 @@ const CommentSchema = new Schema({
     	user: { type : Schema.ObjectId, ref: 'User' }, 
     	text: {type : String, default : '' }
     }],
-    comments: [{
-    body: { type : String, default : '' },
-    user: { type : Schema.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
-  	}],
     createdAt  : { type : Date, default : Date.now },
     project: { type : Schema.ObjectId, ref: 'Project' },
     author: { type : Schema.ObjectId, ref: 'User' }
@@ -23,7 +18,22 @@ const CommentSchema = new Schema({
 
 CommentSchema.methods = {
 
+  addReply: function (reply_data) {
+	var user = req.comment = this.findOne({ '_id' : reply_data['user_id'] });
+	this.replies << { user: user, reply_text: reply_data['text'] }	  	
+    this.save();
+  },
 
+ 
+
+  resolve: function (statusId) {
+  	if (statusId === 1) {
+  		this.status = "resolved";
+  	} else {
+  		this.status = "unresolved";
+  	}
+  	this.save();
+  }
 };
 
 

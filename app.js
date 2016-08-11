@@ -16,13 +16,9 @@ const users = require('./app/controllers/users');
 const comments = require('./app/controllers/comments');
 const projects = require('./app/controllers/projects');
 
-
-
-
 // app.get('/', function (req, res) {
 //     res.send('Hello World!');
 // });
-
 
 // app.param('projectId', projects.load);
 app.param('projectId', projects.load);
@@ -36,7 +32,7 @@ app.post('/projects/:projectId/comments', comments.create);
 
 app.param('commentId', comments.load);
 app.post('/comments/:commentId/reply', comments.reply);
-app.post('/comments/:commentId/resolve', comments.resolve);
+app.post('/comments/:commentId/resolve/:status_id', comments.resolve);
 
 app.get('/users', users.index);
 app.get('/users/:userId', users.show);
