@@ -10,7 +10,6 @@ exports.index = function (req, res) {
 };
 
 exports.create = function (req, res) {
-    console.log(req.body);
     if (!req.body) return res.sendStatus(400);
 
     var jira = new JiraApi('https', 'jira.yotpo.com', '443', req.body.name, req.body.password, '2');
@@ -35,6 +34,23 @@ exports.create = function (req, res) {
         }
     });
 };
+
+exports.search = function(req, res) {
+    if (!req.body) return res.sendStatus(400);
+
+    User.findById(req.body.user_id, function(err, user) {
+        if (err === null) {
+            var jira = new JiraApi('https', 'jira.yotpo.com', '443', user.jiraName, user.jiraPass, '2');
+            jira.searchUsers(req.body.search_term, 0, 50, true, true, function(error, jiraUsers) {
+                if (error) {
+                    console.log('Error: ' + error)
+                } else {
+                    res.json({status: 200, users: jiraUsers});
+                }
+            });     
+        }
+    });   
+}
 
 exports.show = function (req, res, projectId) {
     res.json({

@@ -37,6 +37,7 @@ app.post('/comments/:commentId/resolve/:status_id', comments.resolve);
 app.get('/users', users.index);
 app.get('/users/:userId', users.show);
 app.post('/users', jsonParser, users.create);
+app.post('/users/search', users.search);
 
 app.listen(process.env.port, function () {
     console.log('Example app listening on port ' + process.env.port);
