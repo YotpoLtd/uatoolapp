@@ -6,10 +6,17 @@ const User = mongoose.model('User');
 const CommentSchema = new Schema({
     text: { type : String, default : '', trim : true },
     status: { type : String, default : '', trim : true },
-    position: { type : String, default : '', trim : true },
+    position: {
+    	x: { type : String, default : '', trim : true },
+    	y: { type : String, default : '', trim : true },
+    	x_box: { type : String, default : '', trim : true },
+    	y_box: { type : String, default : '', trim : true },
+
+	},
     replies: [{ 
     	user: { type : Schema.ObjectId, ref: 'User' }, 
-    	text: {type : String, default : '' }
+    	text: {type : String, default : '' },
+    	createdAt : { type : Date, default : Date.now }
     }],
     createdAt  : { type : Date, default : Date.now },
     project: { type : Schema.ObjectId, ref: 'Project' },

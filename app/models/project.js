@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const Comment = mongoose.model('Comment');
 const Schema = mongoose.Schema;
+const User = mongoose.model('User');
 
 const ProjectSchema = new Schema({
     title: { type : String, default : '', trim : true },
@@ -26,8 +27,14 @@ ProjectSchema.methods = {
 
   addComment: function (comment_params) {
   	var comment = new Comment(comment_params);
-    comment.project = this;
-    comment.save();
+  	var project = this;
+  	User.findById(comment_params['user_id'], function(err, response) {
+		if (err === null) {
+			comment.project = project;
+    		comment.user = response
+    		comment.save();
+		}
+	});
   },
 
   /**
