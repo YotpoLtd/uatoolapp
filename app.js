@@ -10,9 +10,9 @@ require('./app/models/user');
 require('./app/models/comment');
 require('./app/models/project');
 
-const projects = require('./app/controllers/projects');
-const comments = require('./app/controllers/comments');
 const users = require('./app/controllers/users');
+const comments = require('./app/controllers/comments');
+const projects = require('./app/controllers/projects');
 
 
 
