@@ -54,7 +54,7 @@ exports.reply = function (req, res) {
 
     User.findById(reply_data['user_id'], function(err, user) {
         if (err === null) {
-            comment.replies.push({ user: response, text: text });
+            comment.replies.push({ user: user, text: text });
             comment.save();
 
             Project.findById(comment.project, function(err, project) {
