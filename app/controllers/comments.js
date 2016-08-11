@@ -22,8 +22,8 @@ exports.index = function (req, res) {
 };
 
 exports.create = function (req, res) {
-    // var comment = new Comment(req.body);
-    // comment.save();
+    var comment = new Comment(req.body);
+    comment.save();
     res.json({status: 200});
 };
 
