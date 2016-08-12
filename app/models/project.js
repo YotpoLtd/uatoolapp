@@ -35,6 +35,8 @@ ProjectSchema.methods = {
             response.addJiraComment(comment_params, project);
 		}
 	});
+
+	return comment;
   }
 
 };

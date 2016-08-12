@@ -25,8 +25,8 @@ exports.index = function (req, res) {
 
 exports.create = function (req, res) {
     const project = req.project;
-    project.addComment(req.body);
-    res.json({status: 200});
+    var comment = project.addComment(req.body);
+    res.json({comment: comment});
 };
 
 exports.show = function (req, res) {
