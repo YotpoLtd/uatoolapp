@@ -3,9 +3,14 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 exports.index = function (req, res) {
+    User.find({}, function(err, objects) {
+        var map = {};
 
-    res.json({
-        title: 'Login'
+        objects.forEach(function(obj) {
+            map[obj._id] = obj;
+        });
+
+        res.send(map);
     });
 };
 
