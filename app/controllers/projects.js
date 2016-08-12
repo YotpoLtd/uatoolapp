@@ -42,8 +42,14 @@ exports.create = function (req, res) {
 };
 
 exports.index = function (req, res) {
-    res.json({
-        project: "asd"
+    Project.find({}, function(err, objects) {
+        var map = {};
+
+        objects.forEach(function(obj) {
+            map[obj._id] = obj;
+        });
+
+        res.send(map);
     });
 };
 
