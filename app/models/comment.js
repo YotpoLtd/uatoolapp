@@ -20,7 +20,7 @@ const CommentSchema = new Schema({
     }],
     createdAt  : { type : Date, default : Date.now },
     project: { type : Schema.ObjectId, ref: 'Project' },
-    author: { type : Schema.ObjectId, ref: 'User' }
+    user: { type : Schema.ObjectId, ref: 'User' }
 });
 
 
